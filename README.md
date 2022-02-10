@@ -165,4 +165,4 @@ Custom 데이터셋에 YOLOv5 학습 코드를 그대로 쓸 것이기 때문에
 * 어플리게이션 예
     |예시1|예시2|
     |:-:|:-:|
-    |![예시1](./img/yolo.jpg)|![예시2](./img/output.png)|
+    |![예시1](./img/app_ex1.PNG)|![예시2](./img/app_ex2.PNG)|
