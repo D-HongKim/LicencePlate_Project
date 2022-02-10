@@ -27,7 +27,7 @@
 * 참고: <https://github.com/ultralytics/yolov5>
 
 * 인풋 데이터 준비   
-원본 이미지는 번호판 영역을 탐지하기 위해 곧장 YOLO의 입력으로 사용되기 때문에, YOLO의 입력 형식에 맞추기 위해 각 이미지 마다 이미지 파일명과 동일한 이름의 텍스트 파일을 만들어 bounding box의 좌표 정보를 **class, x_center, y_center, width, height**의 포맷의 문자열로 저장한다. 이 때, class를 제외한 나머지 값은 모두 0-1 사이의 **상대 좌표**로 변환한다.
+  원본 이미지는 번호판 영역을 탐지하기 위해 곧장 YOLO의 입력으로 사용되기 때문에, YOLO의 입력 형식에 맞추기 위해 각 이미지 마다 이미지 파일명과 동일한 이름의 텍스트 파일을 만들어 bounding box의 좌표 정보를 **class, x_center, y_center, width, height**의 포맷의 문자열로 저장한다. 이 때, class를 제외한 나머지 값은 모두 0-1 사이의 **상대 좌표**로 변환한다.
 
 ```bash
 ├── Yolo_input
@@ -135,7 +135,6 @@ float max_conf = detectionResult[0][0][4];
             if(max_conf < detectionResult[0][i][4]){
                 max_conf = detectionResult[0][i][4];
                 idx = i;
-
             }
         }
 ```
