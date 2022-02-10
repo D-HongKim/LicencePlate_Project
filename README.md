@@ -26,7 +26,7 @@
 ## 2. YOLOv5 학습 (Pytorch-YOLOv5)
 * 참고: <https://github.com/ultralytics/yolov5>
 
-**1. 인풋 데이터 준비**  
+* 인풋 데이터 준비   
 원본 이미지는 번호판 영역을 탐지하기 위해 곧장 YOLO의 입력으로 사용되기 때문에, YOLO의 입력 형식에 맞추기 위해 각 이미지 마다 이미지 파일명과 동일한 이름의 텍스트 파일을 만들어 bounding box의 좌표 정보를 **class, x_center, y_center, width, height**의 포맷의 문자열로 저장한다. 이 때, class를 제외한 나머지 값은 모두 0-1 사이의 **상대 좌표**로 변환한다.
 
 ```bash
@@ -47,10 +47,10 @@
  	    ├── labels
 ```
 
-**2. dataset.yaml 준비**  
+* dataset.yaml 준비    
 Custom 데이터셋에 YOLOv5 학습 코드를 그대로 쓸 것이기 때문에, 데이터셋 세팅 부분만 수정한다. dataset.yaml 파일에 학습, 검증 데이터 경로와 객체 클래스 정보를 기입한다. 우리 프로젝트의 경우 탐지하는 객체가 차량 번호판 하나이므로 클래스 라벨을 0으로, 이름을 _\'plate\'_ 로 한다.
 
-**3. YOLO 모델 선택**  
+* YOLO 모델 선택  
 본 프로젝트를 위해 가장 작고 빠른 모델인 YOLOv5s를 사용하였다. 
 
 ***
@@ -151,7 +151,7 @@ float max_conf = detectionResult[0][0][4];
 
 * 생성자
 
-    ```
+    ```java
     DHDetectionModel(Activity activity, Interpreter.Options options)
     AlignmentModel(Activity activity, Interpreter.Options options)
     CharModel(Activity activity, Interpreter.Options options)
@@ -160,12 +160,12 @@ float max_conf = detectionResult[0][0][4];
 
 * 공통적으로 사용된 메소드
 
-    ```
+    ```java
     MappedByteBuffer loadModelFile(Activity activity)
     ```
     --> tflite 파일을 불러오는 메소드로 인터프리터 생성시에 사용된다.
 
-    ```
+    ```java
     void convertBitmapToByteBuffer(Bitmap bitmap)
     ```
     --> 추론할때 이미지를 모델에 들어가는 입력 형식인 ByteBuffer의 형태로 바꾸어주는 메소드이다.
@@ -173,19 +173,19 @@ float max_conf = detectionResult[0][0][4];
 * 추론 메소드  
   * DHDetectionModel
 
-    ```
+    ```java
     float[][] getProposal(Bitmap bm, Mat input)
     ```
     --> 이미지가 입력으로 들어가면 float[2][5] 형태의 정보를 출력한다. 출력값에는 모델이 탐지한 bounding box의 x, y, w, h, confidence에 대한 정보를 담고 있다. Yolov5에 nms가 tflite 형태로 변환되지 않기 때문에 따로 nms 코드를 추가하였다. 
   * AlignmentModel
 
-    ```
+    ```java
     float[] getCoordinate(Bitmap bitmap)
     ```
     --> DHDetectionModel에서 나온 출력을 이용해 bounding box의 크기로 자른 이미지가 입력으로 들어가면, float[8] 형태의 정보를 출력한다. 출력값에는 모델이 예측한 꼭짓점의 네 좌표의 (x,y)값을 담고있다.
   * CharModel
 
-    ```
+    ```java
     String getString(Bitmap bm)
     ```
     --> AlignmentModel에서 나온 출력을 이용해 번호판 크기로 이미지를 자른 후 전단변환을 이용해 정면으로 곧게 편 이미지가 입력으로 들어가면, String 형태의 정보를 출력한다. 출력값에는 모델이 예측한 번호판의 글자 정보를 담고있다.
