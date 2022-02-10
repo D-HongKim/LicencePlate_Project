@@ -1,4 +1,4 @@
-# LicensePlate_Project :car:
+# LicensePlate_Project :car: :blue_car:
 [Project] 2021.02 ~ 2021.09 License Plate Detection Application
 
 ## Overview
