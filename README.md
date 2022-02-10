@@ -114,3 +114,50 @@ Custom 데이터셋에 YOLOv5 학습 코드를 그대로 쓸 것이기 때문에
   
   
 - Output : 상하좌우 네 꼭짓점에 대한 X,Y 상대좌표
+
+
+
+## 6. 안드로이드 어플리케이션 제작
+
+어플리케이션에 앞서 만든 학습된 모델들을 사용하기 위해서는 각 모델에 대한 추론 코드를 만들고, 이를 안드로이드 스튜디오의 MainActivity에 불러와서 사용해야 한다. 우리는 YOLOv5(DHDetectionModel.java), 꼭짓점 예측(AlignmentModel.java), 글자예측(CharModel.java) 이 세 가지 모델에 대한 추론 코드를 만들었다. 추론 코드에 사용된 메소드들은 다음과 같다:
+
+* 생성자
+
+    ```
+    DHDetectionModel(Activity activity, Interpreter.Options options)
+    AlignmentModel(Activity activity, Interpreter.Options options)
+    CharModel(Activity activity, Interpreter.Options options)
+    ```
+    --> 각 추론 인스턴스를 생성할 때, 모델 인터프리터(mInterpreter)와 모델에 들어가는 입력(mImageData)에 대해서 정의한다.
+
+* 공통적으로 사용된 메소드
+
+    ```
+    MappedByteBuffer loadModelFile(Activity activity)
+    ```
+    --> tflite 파일을 불러오는 메소드로 인터프리터 생성시에 사용된다.
+
+    ```
+    void convertBitmapToByteBuffer(Bitmap bitmap)
+    ```
+    --> 추론할때 이미지를 모델에 들어가는 입력 형식인 ByteBuffer의 형태로 바꾸어주는 메소드이다.
+
+* 추론 메소드  
+  * DHDetectionModel
+
+    ```
+    float[][] getProposal(Bitmap bm, Mat input)
+    ```
+    --> 이미지가 입력으로 들어가면 float[2][5] 형태의 정보를 출력한다. 출력값에는 모델이 탐지한 bounding box의 x, y, w, h, confidence에 대한 정보를 담고 있다. Yolov5에 nms가 tflite 형태로 변환되지 않기 때문에 따로 nms 코드를 추가하였다. 
+  * AlignmentModel
+
+    ```
+    float[] getCoordinate(Bitmap bitmap)
+    ```
+    --> DHDetectionModel에서 나온 출력을 이용해 bounding box의 크기로 자른 이미지가 입력으로 들어가면, float[8] 형태의 정보를 출력한다. 출력값에는 모델이 예측한 꼭짓점의 네 좌표의 (x,y)값을 담고있다.
+  * CharModel
+
+    ```
+    String getString(Bitmap bm)
+    ```
+    --> AlignmentModel에서 나온 출력을 이용해 번호판 크기로 이미지를 자른 후 전단변환을 이용해 정면으로 곧게 편 이미지가 입력으로 들어가면, String 형태의 정보를 출력한다. 출력값에는 모델이 예측한 번호판의 글자 정보를 담고있다.
