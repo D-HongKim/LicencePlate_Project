@@ -125,7 +125,7 @@ Custom 데이터셋에 YOLOv5 학습 코드를 그대로 쓸 것이기 때문에
 
 ## 5. pt >> onnx >> pb >> tflite 변환
 
-* YOLOv5
+- YOLOv5  
 제공해주는 export.py를 사용해 TensorFlow Lite 파일로 변환한다. 이 때, Non Max Suppression 부분은 TensorFlow Lite로 변환되지 않아 안드로이드 스튜디오 코드를 짤 때 따로 추가하였다. YOLO의 출력으로 나오는 (1, 3024, 6)의 텐서는 3024개의 가능한 바운딩 박스와, 각 바운딩 박스의 x_center, y_center, width, height, confidence, 객체 클래스 정보를 포함하고 있다. 아래 코드는 가능한 3024개의 바운딩 박스 중 가장 큰 confidence 값을 가지는 하나의 바운딩 박스만을 추론의 결과로 만드는 코드이다 (Non Max Suppression).
 
 ```java
@@ -140,7 +140,7 @@ float max_conf = detectionResult[0][0][4];
         }
 ```
 
-* 꼭짓점 예측 모델 & 글자 예측 모델
+- 꼭짓점 예측 모델 & 글자 예측 모델  
 모델 학습 시, 검증 데이터셋에 대해 가장 높은 정확도를 가지는 모델의 가중치를 onnx 파일로 저장하고, tflite_converter.py를 통해 최종적으로 어플리케이션 상에서 모델을 로드할 때 쓰이는 TensorFlow Lite 파일로 변환한다.
 
 ***
