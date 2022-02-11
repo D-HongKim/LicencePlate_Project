@@ -217,7 +217,7 @@ float max_conf = detectionResult[0][0][4];
   <a href="https://play.google.com/store/apps/details?id=com.carplate.camerax">
   <img src="https://img.shields.io/badge/Google Play-61DAFB?style=for-the-badge&logo=Google Play&logoColor=black"></a>
   
-  |Google Play|설치 |
+  |설치 |설치 후|
   |:-:|:-:|
   |![예시](https://user-images.githubusercontent.com/64757426/153539561-ae80dc2d-8f66-467e-988a-c19001208172.png)|![예시2](https://user-images.githubusercontent.com/64757426/153539592-41432983-1912-4e71-8752-c47a70c56477.jpg)|
   
