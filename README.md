@@ -210,4 +210,10 @@ float max_conf = detectionResult[0][0][4];
     |:-:|:-:|
     |![예시1](./img/app_ex1.PNG)|![예시2](./img/app_ex2.PNG)|
     
+## 7. Google Play에 어플리케이션 등록
+
+
+  다운로드: 
+  <a href="https://play.google.com/store/apps/details?id=com.carplate.camerax">
+  <img src="https://img.shields.io/badge/Google Play-181717?style=for-the-badge&logo=Google Play&logoColor=white"></a>
 
