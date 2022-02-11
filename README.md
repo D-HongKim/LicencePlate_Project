@@ -218,5 +218,6 @@ float max_conf = detectionResult[0][0][4];
   <img src="https://img.shields.io/badge/Google Play-61DAFB?style=for-the-badge&logo=Google Play&logoColor=black"></a>
   
   |:-:|:-:|
-  |![예시](https://user-images.githubusercontent.com/64757426/153539372-3807e95b-e190-4c15-a436-0bcac7c1059d.png)|![예시2](https://user-images.githubusercontent.com/64757426/153539425-9f53af9a-5eb9-4e0d-92f7-1a75ab98b623.jpg)|
+  |![예시](https://user-images.githubusercontent.com/64757426/153539561-ae80dc2d-8f66-467e-988a-c19001208172.png)|![예시2](https://user-images.githubusercontent.com/64757426/153539592-41432983-1912-4e71-8752-c47a70c56477.jpg)
+|
   
